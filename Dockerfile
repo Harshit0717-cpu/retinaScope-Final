@@ -1,5 +1,5 @@
 # RetinaScope FastAPI backend — CPU inference on Railway
-FROM python:3.11-slim
+FROM python:3.11-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -9,7 +9,10 @@ WORKDIR /app
 
 # libgomp1 supports native numerical/vision packages.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libgomp1 libgl1 \
+    && apt-get install -y --no-install-recommends \
+        libgomp1 \
+        libgl1 \
+        libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install CPU-only PyTorch to avoid huge CUDA dependencies.
