@@ -9,7 +9,7 @@ WORKDIR /app
 
 # libgomp1 supports native numerical/vision packages.
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libgomp1 \
+    && apt-get install -y --no-install-recommends libgomp1 libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install CPU-only PyTorch to avoid huge CUDA dependencies.
