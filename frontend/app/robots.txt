@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://retina-scope-final.vercel.app/sitemap.xml
