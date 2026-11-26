@@ -32,10 +32,28 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "RetinaScope AI — Explainable Retinal Screening",
+  metadataBase: new URL(
+    "https://retina-scope-final.vercel.app"
+  ),
+  title: "RetinaScope AI | Diabetic Retinopathy Screening",
   description:
-    "A research and demonstration platform for explainable diabetic retinopathy screening, retinal image review and screening-planning insights.",
+    "RetinaScope AI is an explainable AI research platform for diabetic retinopathy screening using EfficientNet-B0, dual-eye analysis, Grad-CAM visualization and district-level healthcare planning.",
   applicationName: "RetinaScope AI",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "RetinaScope AI",
+    description:
+      "Explainable AI-powered retinal screening research platform.",
+    url: "https://retina-scope-final.vercel.app",
+    siteName: "RetinaScope AI",
+    type: "website",
+  },
 };
 
 export const viewport: Viewport = {
