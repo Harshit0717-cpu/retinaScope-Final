@@ -132,66 +132,32 @@ retinaScope-Final/
 ├── train.py                   Training script
 ├── train_full.py              Full-training script
 ├── app.py                     Earlier Streamlit interface
+├── Start%20RetinaScope.bat     One-click Windows launcher
 ├── Dockerfile                 CPU backend container
 ├── requirements-backend.txt   Backend dependencies
 └── requirements.txt           Additional research dependencies
 ```
 
-## Local development
+## Quick start (Windows)
 
-Use authorized local model assets and demonstration images only. The current backend expects `models/efficientnet_b0_best.pth` to exist. Review [third-party notices](THIRD_PARTY_NOTICES.md) before obtaining, copying or using any dataset, checkpoint or geospatial asset.
+**Prerequisites:** Git, Python 3.11 and a Node.js version supported by Next.js 16. Use authorized model assets and de-identified demonstration images only. The launcher requires `models/efficientnet_b0_best.pth`; see [third-party notices](THIRD_PARTY_NOTICES.md).
 
-**Prerequisites:** Git, Python 3.11 and a Node.js version supported by the frontend's Next.js release.
-
-### 1. Clone the repository
-
-```bash
+```powershell
 git clone https://github.com/Harshit0717-cpu/retinaScope-Final.git
 cd retinaScope-Final
 ```
 
-### 2. Start the inference backend
-
-From the repository root, create and activate a Python virtual environment. On Windows PowerShell:
+Double-click `Start%20RetinaScope.bat` in the repository root, or run:
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\Start%20RetinaScope.bat
 ```
 
-On macOS/Linux, activate with `source .venv/bin/activate` instead. Then install the CPU inference dependencies and start the API:
+The launcher creates `venv` if needed, installs missing Python and Node.js dependencies, starts FastAPI and Next.js, and opens the browser. The first run may take longer while dependencies download. Keep both server windows open; if the browser opens before setup completes, refresh once both servers are running.
 
-```bash
-python -m pip install --upgrade pip
-python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.6.0 torchvision==0.21.0
-python -m pip install -r requirements-backend.txt
-python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
-```
+**Local workspace:** [http://127.0.0.1:3000](http://127.0.0.1:3000) · **API docs:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
-Check `http://127.0.0.1:8000/api/health` and the interactive API documentation at `http://127.0.0.1:8000/docs`.
-
-### 3. Start the web interface
-
-In a separate terminal:
-
-```bash
-cd frontend
-npm install
-```
-
-Create `frontend/.env.local` with:
-
-```dotenv
-NEXT_PUBLIC_RETINASCOPE_PREDICT_URL=http://127.0.0.1:8000/api/predict
-```
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:3000`. For a production compilation check, run `npm run build` from the frontend directory.
-
-> The public deployment uses its own environment configuration. Do not replace deployed environment variables with local development URLs.
+> The launcher is for Windows local development. Vercel and Railway retain their own deployment configurations.
 
 ## API reference
 

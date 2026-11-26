@@ -18,12 +18,12 @@ echo.
 
 if not exist "%PROJECT_ROOT%\backend\main.py" (
     echo [ERROR] backend\main.py was not found.
-    echo Put this BAT file in the project root beside backend, frontend, models and venv.
+    echo Put this BAT file in the project root beside backend, frontend and models.
     goto MAIN_ERROR
 )
 if not exist "%PROJECT_ROOT%\frontend\package.json" (
     echo [ERROR] frontend\package.json was not found.
-    echo Put this BAT file in the project root beside backend, frontend, models and venv.
+    echo Put this BAT file in the project root beside backend, frontend and models.
     goto MAIN_ERROR
 )
 if not exist "%PROJECT_ROOT%\models\efficientnet_b0_best.pth" (
@@ -32,10 +32,10 @@ if not exist "%PROJECT_ROOT%\models\efficientnet_b0_best.pth" (
     goto MAIN_ERROR
 )
 if not exist "%PROJECT_ROOT%\venv\Scripts\python.exe" (
-    echo [ERROR] Project virtual environment was not found:
-    echo venv\Scripts\python.exe
-    echo Create/restore the project venv first.
-    goto MAIN_ERROR
+    echo [INFO] Creating the project virtual environment...
+    call :CREATE_VENV
+    if errorlevel 1 goto MAIN_ERROR
+    echo [OK] Virtual environment created.
 )
 
 rem Check whether the expected backend is already healthy.
@@ -184,4 +184,28 @@ echo.
 echo Startup cancelled. Fix the error above and run this BAT again.
 echo.
 pause
+exit /b 1
+
+:CREATE_VENV
+rem Prefer Python 3.11, the version used by the deployed backend.
+py -3.11 -c "import sys" >nul 2>&1
+if not errorlevel 1 (
+    py -3.11 -m venv "%PROJECT_ROOT%\venv"
+    if errorlevel 1 goto VENV_ERROR
+    goto VENV_CHECK
+)
+python -c "import sys; sys.exit(0 if sys.version_info[:2] == (3, 11) else 1)" >nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] Python 3.11 was not found. Install Python 3.11 and reopen this BAT.
+    exit /b 1
+)
+python -m venv "%PROJECT_ROOT%\venv"
+if errorlevel 1 goto VENV_ERROR
+
+:VENV_CHECK
+if not exist "%PROJECT_ROOT%\venv\Scripts\python.exe" goto VENV_ERROR
+exit /b 0
+
+:VENV_ERROR
+echo [ERROR] Virtual environment creation failed. Read the Python error above.
 exit /b 1
