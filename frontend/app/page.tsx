@@ -885,6 +885,7 @@ export default function Home() {
 
   return (
     <main className="app-shell">
+      <script id="retinascope-website-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@type": "WebSite", name: "RetinaScope AI", alternateName: "RetinaScope", url: "https://retina-scope-final.vercel.app/" }).replace(/</g, "\\u003c") }} />
       <a className="skip-link" href="#workspace">Skip to screening workspace</a>
       <div className="scroll-progress" aria-hidden="true" />
       <div className="ambient ambient-one" aria-hidden="true" />
@@ -935,10 +936,10 @@ export default function Home() {
         <Reveal className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-dot" /> EXPLAINABLE RETINAL INTELLIGENCE <span className="eyebrow-rule" /></div>
           <h1 id="hero-title" className="hero-title">
-            <span className="hero-title-line"><span>See</span> <span>beyond</span></span>
-            <span className="hero-title-line"><span>the</span> <em>image.</em></span>
+            <span className="hero-title-line"><span>RetinaScope</span></span>
+            <span className="hero-title-line"><span>AI</span> <em>screening.</em></span>
           </h1>
-          <p className="hero-lede">A clearer view of diabetic retinopathy screening. Bring retinal imagery, explainable AI and practical screening insights into one focused workspace.</p>
+          <p className="hero-lede">RetinaScope AI by Team Shadow is an explainable diabetic retinopathy screening research platform. Explore single- and dual-eye retinal image analysis, Grad-CAM visual explanations and district-level healthcare planning.</p>
           <div className="hero-actions">
             <a className="button button-primary hero-primary-cta" href="#workspace">Explore screening workspace <Icon name="arrow" size={18} /></a>
             <a className="text-link" href="#workflow">Discover the approach <span>↗</span></a>
@@ -1590,6 +1591,7 @@ export default function Home() {
         <h2>Technology with<br /><em>a human point of view.</em></h2>
         <p>RetinaScope brings together retinal image analysis, visual explanations and screening-planning context — with clarity, transparency and responsible human review at the centre.</p>
         <a className="button button-primary closing-cta" href="#workspace">Open screening workspace <Icon name="arrow" size={18} /></a>
+        <a className="text-link" href="/methodology">Read the RetinaScope AI research methodology <span aria-hidden="true">↗</span></a>
         <footer className="site-footer">
           <a className="brand footer-brand" href="#home" aria-label="RetinaScope home"><span className="brand-mark" aria-hidden="true"><i /><i /><i /></span><span className="brand-name"><span className="brand-retina">retina</span><span className="brand-scope">scope</span><sup>AI</sup></span></a>
           <nav className="footer-nav" aria-label="Footer navigation">{navigation.map((item) => <a key={item.id} href={`#${item.id}`}>{item.label}</a>)}</nav>

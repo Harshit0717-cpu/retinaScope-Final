@@ -1,3 +1,9 @@
+# RetinaScope AI — Team Shadow
+
+**Live research demo:** [RetinaScope AI](https://retina-scope-final.vercel.app/).
+
+[Research methodology and limitations](https://retina-scope-final.vercel.app/methodology)
+
 RetinaScope 
 
 AI-Powered Diabetic Retinopathy Screening & Healthcare Resource Planning
