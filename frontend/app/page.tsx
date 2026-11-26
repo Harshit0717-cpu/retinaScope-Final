@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import ReportDownload from "./report-download";
 import {
   useEffect,
   useMemo,
@@ -1263,6 +1264,9 @@ export default function Home() {
             </label>
 
             <p className="clinical-caveat">These model outputs are research screening aids, not standalone clinical diagnoses. A qualified eye-care professional should review both images and results.</p>
+            {resultMode === "live" && rightEyeFile && leftEyeFile && (
+              <ReportDownload mode="both" predictUrl={PREDICT_URL} rightFile={rightEyeFile} leftFile={leftEyeFile} />
+            )}
             <div className="results-actions">
               <button className="button button-secondary" type="button" onClick={resetUpload}><Icon name="refresh" size={16} /> Upload another set</button>
             </div>
@@ -1365,6 +1369,9 @@ export default function Home() {
               </div>
             </div>
 
+            {resultMode === "live" && selectedFile && (
+              <ReportDownload mode="single" predictUrl={PREDICT_URL} file={selectedFile} />
+            )}
             <div className="results-actions">
               <button className="button button-secondary" type="button" onClick={resetUpload}><Icon name="refresh" size={16} /> Upload another image</button>
               {resultMode === "demo" && <span className="demo-inline-note"><DemoBadge /> Example values only; no patient data used.</span>}
